@@ -1,5 +1,5 @@
 {
-  "name": "jsbsonrpcserializable",
+  "name": "jsbsonrpc-serializable",
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/Serializable.js",
