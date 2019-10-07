@@ -220,6 +220,73 @@ var SRecordType = /** @class */ (function (_super) {
     return SRecordType;
 }(Object));
 exports.SRecordType = SRecordType;
+var SEnumType = /** @class */ (function () {
+    function SEnumType() {
+        this._value = null;
+    }
+    SEnumType.prototype.get = function () {
+        return this._value;
+    };
+    SEnumType.prototype.set = function (value) {
+        this._value = value;
+    };
+    SEnumType.prototype.toBson = function () {
+        if (typeof this._value == 'number') {
+            return new bson_1.default.Int32(this._value);
+        }
+        else if (typeof this._value == 'string') {
+            return this._value;
+        }
+        return this._value;
+    };
+    SEnumType.prototype.fromBson = function (data, createFactory) {
+        this._value = data;
+    };
+    return SEnumType;
+}());
+exports.SEnumType = SEnumType;
+var SFlagsType = /** @class */ (function () {
+    function SFlagsType(enumObj) {
+        this._raw_value = 0;
+        this._enumObj = enumObj;
+    }
+    SFlagsType.prototype.get = function () {
+        return this._raw_value;
+    };
+    SFlagsType.prototype.set = function () {
+        var values = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            values[_i] = arguments[_i];
+        }
+        this._raw_value = 0;
+        if (values.length > 0) {
+            for (var _a = 0, values_1 = values; _a < values_1.length; _a++) {
+                var item = values_1[_a];
+                this._raw_value |= item;
+            }
+        }
+    };
+    SFlagsType.prototype.getList = function () {
+        var _this = this;
+        var outArr = [];
+        if (this._enumObj) {
+            Object.keys(this._enumObj).forEach((function (value, index) {
+                if (_this._raw_value & _this._enumObj[value]) {
+                    outArr.push(_this._enumObj[value]);
+                }
+            }));
+        }
+        return outArr;
+    };
+    SFlagsType.prototype.toBson = function () {
+        return new bson_1.default.Int32(this._raw_value);
+    };
+    SFlagsType.prototype.fromBson = function (data, createFactory) {
+        this._raw_value = data;
+    };
+    return SFlagsType;
+}());
+exports.SFlagsType = SFlagsType;
 var Serializable = /** @class */ (function () {
     function Serializable(serializableName, serializableVerUID) {
         this._serializableMembers = {};

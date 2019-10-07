@@ -215,6 +215,75 @@ export class SRecordType<K extends string, V extends STypeBase | number | string
     }
 }
 
+export class SEnumType<ENUM_TYPE, V extends number | string = number> implements STypeBase {
+    private _value: ENUM_TYPE | null = null;
+
+    get(): ENUM_TYPE | null {
+        return this._value;
+    }
+
+    set(value: ENUM_TYPE | null) {
+        this._value = value;
+    }
+
+    toBson(): any {
+        if(typeof this._value == 'number') {
+            return new BSON.Int32(this._value);
+        }else if(typeof this._value == 'string') {
+            return this._value;
+        }
+        return this._value;
+    }
+
+    fromBson(data: any, createFactory?: CreateFactoryType) {
+        this._value = data;
+    }
+}
+
+export class SFlagsType<ENUM_TYPE, V extends number = number> implements STypeBase {
+    private _raw_value: number = 0;
+    private _enumObj: object;
+
+    constructor(enumObj) {
+        this._enumObj = enumObj;
+    }
+
+    get(): number {
+        return this._raw_value;
+    }
+
+    set(...values: number[]) {
+        this._raw_value = 0;
+        if(values.length > 0) {
+            for(var item of values) {
+                this._raw_value |= item;
+            }
+        }
+    }
+
+    getList(): ENUM_TYPE[] {
+        let outArr: ENUM_TYPE[] = [];
+
+        if(this._enumObj) {
+            Object.keys(this._enumObj).forEach(((value, index) => {
+                if (this._raw_value & this._enumObj[value]) {
+                    outArr.push(this._enumObj[value]);
+                }
+            }));
+        }
+
+        return outArr;
+    }
+
+    toBson(): any {
+        return new BSON.Int32(this._raw_value);
+    }
+
+    fromBson(data: any, createFactory?: CreateFactoryType) {
+        this._raw_value = data;
+    }
+}
+
 export class Serializable implements STypeBase {
     private _serializableName: string;
     private _serializableVerUID: BigInteger; // bigint

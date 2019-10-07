@@ -50,6 +50,23 @@ export declare class SRecordType<K extends string, V extends STypeBase | number 
     toBson(): any;
     fromBson(data: any): void;
 }
+export declare class SEnumType<ENUM_TYPE, V extends number | string = number> implements STypeBase {
+    private _value;
+    get(): ENUM_TYPE | null;
+    set(value: ENUM_TYPE | null): void;
+    toBson(): any;
+    fromBson(data: any, createFactory?: CreateFactoryType): void;
+}
+export declare class SFlagsType<ENUM_TYPE, V extends number = number> implements STypeBase {
+    private _raw_value;
+    private _enumObj;
+    constructor(enumObj: any);
+    get(): number;
+    set(...values: number[]): void;
+    getList(): ENUM_TYPE[];
+    toBson(): any;
+    fromBson(data: any, createFactory?: CreateFactoryType): void;
+}
 export declare class Serializable implements STypeBase {
     private _serializableName;
     private _serializableVerUID;
