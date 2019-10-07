@@ -24,7 +24,7 @@ enum TestFlags {
 }
 
 class TestEnum extends Serializable {
-    a: SEnumType<TestType, number> = new SEnumType<TestType, number>();
+    a: SEnumType<TestType, number> = new SEnumType<TestType, number>(TestType);
     b: SFlagsType<TestFlags, number> = new SFlagsType<TestFlags, number>(TestFlags);
 
     constructor() {
