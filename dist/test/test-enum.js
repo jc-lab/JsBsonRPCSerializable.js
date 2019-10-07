@@ -32,7 +32,7 @@ var TestEnum = /** @class */ (function (_super) {
     __extends(TestEnum, _super);
     function TestEnum() {
         var _this = _super.call(this, 'test', 101) || this;
-        _this.a = new Serializable_1.SEnumType();
+        _this.a = new Serializable_1.SEnumType(TestType);
         _this.b = new Serializable_1.SFlagsType(TestFlags);
         _this.serializableMapMember('a', _this.a);
         _this.serializableMapMember('b', _this.b);

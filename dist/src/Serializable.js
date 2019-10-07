@@ -221,8 +221,9 @@ var SRecordType = /** @class */ (function (_super) {
 }(Object));
 exports.SRecordType = SRecordType;
 var SEnumType = /** @class */ (function () {
-    function SEnumType() {
+    function SEnumType(enumObj) {
         this._value = null;
+        this._enumObj = enumObj;
     }
     SEnumType.prototype.get = function () {
         return this._value;

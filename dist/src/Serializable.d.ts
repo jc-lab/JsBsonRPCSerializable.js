@@ -52,6 +52,8 @@ export declare class SRecordType<K extends string, V extends STypeBase | number 
 }
 export declare class SEnumType<ENUM_TYPE, V extends number | string = number> implements STypeBase {
     private _value;
+    private _enumObj;
+    constructor(enumObj: object);
     get(): ENUM_TYPE | null;
     set(value: ENUM_TYPE | null): void;
     toBson(): any;
