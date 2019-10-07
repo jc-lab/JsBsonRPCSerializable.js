@@ -1,0 +1,7 @@
+.awcache
+.vscode
+.idea
+config 
+src
+node_modules
+
