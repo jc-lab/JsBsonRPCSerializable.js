@@ -217,6 +217,11 @@ export class SRecordType<K extends string, V extends STypeBase | number | string
 
 export class SEnumType<ENUM_TYPE, V extends number | string = number> implements STypeBase {
     private _value: ENUM_TYPE | null = null;
+    private _enumObj: object;
+
+    constructor(enumObj: object) {
+        this._enumObj = enumObj;
+    }
 
     get(): ENUM_TYPE | null {
         return this._value;
