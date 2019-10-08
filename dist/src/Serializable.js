@@ -182,7 +182,7 @@ var SListType = /** @class */ (function (_super) {
                 this.pop();
             for (var _i = 0, data_2 = data; _i < data_2.length; _i++) {
                 var item = data_2[_i];
-                this.push(bsonToLiteral(undefined, data, createFactory));
+                this.push(bsonToLiteral(undefined, item, createFactory));
             }
         }
         else {

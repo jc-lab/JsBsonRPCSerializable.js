@@ -185,7 +185,7 @@ export class SListType<T extends STypeBase | number | string | boolean | Buffer>
         if(Array.isArray(data)) {
             while(this.length > 0) this.pop();
             for(var item of data) {
-                this.push(bsonToLiteral(undefined, data, createFactory));
+                this.push(bsonToLiteral(undefined, item, createFactory));
             }
         }else{
             throw Error("Unknown List Type: typeof=[" + (typeof data) + "], data=" + data);
