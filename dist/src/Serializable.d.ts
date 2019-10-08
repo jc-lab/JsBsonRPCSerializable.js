@@ -1,5 +1,5 @@
 import { Buffer } from 'buffer';
-import { BigInteger } from 'big-integer';
+import bigInt, { BigInteger } from 'big-integer';
 export declare type CreateFactoryType = (serializableName: string, serializableVerUID: BigInteger) => Serializable;
 interface Field {
     name: string;
@@ -74,6 +74,8 @@ export declare class Serializable implements STypeBase {
     private _serializableVerUID;
     private _serializableMembers;
     constructor(serializableName: string, serializableVerUID: number | BigInteger);
+    readonly serializableName: string;
+    readonly serializableVerUID: bigInt.BigInteger;
     serializableMapMember(name: string, obj: STypeBase): SerializableMapMemberConfigurer;
     toBson(): any;
     fromBson(bson: any): void;

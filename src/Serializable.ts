@@ -302,6 +302,15 @@ export class Serializable implements STypeBase {
             this._serializableVerUID = serializableVerUID;
     }
 
+
+    get serializableName(): string {
+        return this._serializableName;
+    }
+
+    get serializableVerUID(): bigInt.BigInteger {
+        return this._serializableVerUID;
+    }
+
     serializableMapMember(name: string, obj: STypeBase) : SerializableMapMemberConfigurer {
         let meta = this._serializableMembers[name] = {
             name: name,

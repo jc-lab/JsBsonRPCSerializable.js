@@ -297,6 +297,20 @@ var Serializable = /** @class */ (function () {
         else
             this._serializableVerUID = serializableVerUID;
     }
+    Object.defineProperty(Serializable.prototype, "serializableName", {
+        get: function () {
+            return this._serializableName;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Serializable.prototype, "serializableVerUID", {
+        get: function () {
+            return this._serializableVerUID;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Serializable.prototype.serializableMapMember = function (name, obj) {
         var meta = this._serializableMembers[name] = {
             name: name,
